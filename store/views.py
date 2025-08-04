@@ -10,7 +10,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
 
     def get_permissions(self):
         if self.request.method == 'POST':
-            return [permissions.IsAdminUser()]  # or AllowAny for now
+            return [permissions.IsAdminUser()]  # Requires authenticated admin
         return [permissions.AllowAny()]
 
 class CartItemListCreateView(generics.ListCreateAPIView):
@@ -20,4 +20,4 @@ class CartItemListCreateView(generics.ListCreateAPIView):
         return CartItem.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user)  # Now valid with 'user' field

@@ -2,11 +2,10 @@ from rest_framework import serializers
 from .models import Product, CartItem
 
 class ProductSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(required=False)
-
+    image_url = serializers.URLField(source='image_url')
     class Meta:
         model = Product
-        fields = ['id', 'name', 'price', 'description', 'image']
+        fields = ['id', 'name', 'price', 'description', 'image_url']
 
 
 class CartItemSerializer(serializers.ModelSerializer):
